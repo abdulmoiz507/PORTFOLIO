@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects - Abdul Moiz</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <h1>Abdul <span>Moiz</span></h1>
+    <p class="tagline">Cybersecurity Student | Future Cybersecurity Professional</p>
+</header>
+
+<nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="skills.html">Skills</a>
+    <a href="education.html">Education</a>
+    <a href="project.html" class="active">Projects</a>
+    <a href="contact.html">Contact</a>
+</nav>
+
+<section>
+    <div class="section-label">// my projects</div>
+    <h2>What I've Built</h2>
+    <p>
+        These are the three projects I have completed so far. Each one taught me something new —
+        from Python logic to visual programming to structured C++ design. The code is shown in full
+        so you can read, copy, and run it yourself.
+    </p>
+
+    <!-- ====== PROJECT 1: Python Number Guessing ====== -->
+    <div class="project-card">
+        <span class="project-tag">Python</span>
+        <span class="project-tag">Game</span>
+        <span class="project-tag">Beginner</span>
+        <h3>Number Guessing Game</h3>
+        <p>
+            A console-based Python game where the computer picks a random number between 1 and 100
+            and the player tries to guess it. The game gives hints ("too high" / "too low") after
+            each guess and tracks the number of attempts. The player wins when they guess correctly,
+            and the final score is based on how few guesses were needed.
+        </p>
+        <p>
+            <strong style="color:var(--text-primary)">Concepts practised:</strong>
+            random module, while loops, if/elif/else conditionals, user input with int() casting,
+            input validation using try/except, and f-string formatting.
+        </p>
+        <p>
+            <strong style="color:var(--text-primary)">How to run:</strong>
+            Save the file as <code>number_game.py</code> and run <code>python number_game.py</code>
+            in your terminal. No extra libraries required.
+        </p>
+
+        <div class="code-header">
+            <div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div>
+            <span>number_game.py</span>
+        </div>
+<pre>
+import random
+
+def get_score(attempts):
+    if attempts &lt;= 3:
+        return "PERFECT  - Elite Hacker Mode"
+    elif attempts &lt;= 6:
+        return "GREAT    - Sharp Instincts"
+    elif attempts &lt;= 10:
+        return "GOOD     - Keep Practising"
+    else:
+        return "KEEP TRYING - You'll get better!"
+
+def play_game():
+    print("=" * 45)
+    print("   NUMBER GUESSING GAME")
+    print("   Guess the number between 1 and 100")
+    print("=" * 45)
+
+    secret = random.randint(1, 100)
+    attempts = 0
+    guessed = False
+
+    while not guessed:
+        try:
+            guess = int(input("\nEnter your guess: "))
+        except ValueError:
+            print("  Please enter a valid number.")
+            continue
+
+        attempts += 1
+
+        if guess &lt; 1 or guess &gt; 100:
+            print("  Out of range! Guess between 1 and 100.")
+        elif guess &lt; secret:
+            print(f"  Too LOW!  (Attempt {attempts})")
+        elif guess &gt; secret:
+            print(f"  Too HIGH! (Attempt {attempts})")
+        else:
+            guessed = True
+            print("\n" + "=" * 45)
+            print(f"  CORRECT! The number was {secret}.")
+            print(f"  You guessed it in {attempts} attempt(s).")
+            print(f"  Score: {get_score(attempts)}")
+            print("=" * 45)
+
+    again = input("\nPlay again? (yes/no): ").strip().lower()
+    if again == "yes":
+        play_game()
+    else:
+        print("\nThanks for playing. Goodbye!\n")
+
+play_game()
+</pre>
+    </div>
+
+    <!-- ====== PROJECT 2: Scratch Game ====== -->
+    <div class="project-card">
+        <span class="project-tag">Scratch</span>
+        <span class="project-tag">Game</span>
+        <span class="project-tag">Visual Programming</span>
+        <h3>Interactive Scratch Game</h3>
+        <p>
+            Built using the MIT Scratch editor (scratch.mit.edu), this is a simple interactive game
+            where a character moves across the screen, avoids obstacles, and scores points by collecting
+            items. Scratch uses a visual block-based programming language that teaches the fundamentals
+            of event-driven programming, sprites, and game states without writing traditional code.
+        </p>
+        <p>
+            <strong style="color:var(--text-primary)">Concepts practised:</strong>
+            event broadcasting, sprite movement with arrow-key controls, collision detection using
+            "touching color" blocks, variables for score and lives, and "forever" loop blocks
+            for continuous game logic.
+        </p>
+        <p>
+            <strong style="color:var(--text-primary)">How to access:</strong>
+            Go to <a href="https://scratch.mit.edu" target="_blank">scratch.mit.edu</a>, sign in,
+            and open the project from your profile. You can also recreate it by following the
+            block logic described below.
+        </p>
+
+        <div class="code-header">
+            <div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div>
+            <span>scratch_game_logic.txt  (pseudocode — replicate as Scratch blocks)</span>
+        </div>
+<pre>
+=== SPRITE: Player (Cat) ===
+
+WHEN [Green Flag] clicked:
+    set x to -180
+    set y to 0
+    set [Score] to 0
+    set [Lives] to 3
+
+WHEN [right arrow] key pressed:
+    change x by 10
+
+WHEN [left arrow] key pressed:
+    change x by -10
+
+WHEN [up arrow] key pressed:
+    change y by 10
+
+WHEN [down arrow] key pressed:
+    change y by -10
+
+=== SPRITE: Coin (Yellow circle) ===
+
+WHEN [Green Flag] clicked:
+    forever:
+        go to random position
+        wait 2 seconds
+
+WHEN touching [Player]:
+    change [Score] by 1
+    play sound [pop]
+    go to random position
+
+=== SPRITE: Obstacle (Red block) ===
+
+WHEN [Green Flag] clicked:
+    forever:
+        glide 1 secs to random position
+        if touching [Player] then:
+            change [Lives] by -1
+            say [Ouch!] for 1 second
+            if [Lives] = 0 then:
+                broadcast [Game Over]
+                stop all
+
+=== BACKDROP: Game Over screen ===
+
+WHEN I receive [Game Over]:
+    switch backdrop to [game_over]
+    say [Game Over! Final Score: (Score)]
+    stop all
+</pre>
+    </div>
+
+    <!-- ====== PROJECT 3: C++ Airline Seat Reservation ====== -->
+    <div class="project-card">
+        <span class="project-tag">C++</span>
+        <span class="project-tag">Console App</span>
+        <span class="project-tag">Data Structures</span>
+        <h3>Airline Seat Reservation System</h3>
+        <p>
+            A console-based C++ application that simulates an airline seat reservation system.
+            The plane has 30 seats arranged in rows of 3 (First Class: rows 1–5, Economy: rows 6–10).
+            Users can view the seat map, book a seat by entering their name and seat number,
+            cancel a booking, and view all current reservations. Seats are stored in an array of
+            structs, each tracking the seat number, passenger name, and booking status.
+        </p>
+        <p>
+            <strong style="color:var(--text-primary)">Concepts practised:</strong>
+            structs, arrays, for-loops, switch statements, string handling with
+            <code>std::string</code>, input validation, and menu-driven program design.
+        </p>
+        <p>
+            <strong style="color:var(--text-primary)">How to run:</strong>
+            Save as <code>airline.cpp</code>, compile with <code>g++ airline.cpp -o airline</code>,
+            then run <code>./airline</code> (Linux/Mac) or <code>airline.exe</code> (Windows).
+        </p>
+
+        <div class="code-header">
+            <div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div>
+            <span>airline.cpp</span>
+        </div>
+<pre>
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;iomanip&gt;
+using namespace std;
+
+const int TOTAL_SEATS = 30;
+
+struct Seat {
+    int    seatNumber;
+    string passengerName;
+    bool   isBooked;
+};
+
+// Initialize all seats as empty
+void initSeats(Seat seats[]) {
+    for (int i = 0; i &lt; TOTAL_SEATS; i++) {
+        seats[i].seatNumber    = i + 1;
+        seats[i].passengerName = "";
+        seats[i].isBooked      = false;
+    }
+}
+
+// Display the seat map
+void displaySeats(Seat seats[]) {
+    cout &lt;&lt; "\n============================================\n";
+    cout &lt;&lt; "        AIRLINE SEAT MAP\n";
+    cout &lt;&lt; "        [B] = Booked  [A] = Available\n";
+    cout &lt;&lt; "============================================\n";
+    cout &lt;&lt; "  FIRST CLASS (Rows 1-5)\n";
+    for (int i = 0; i &lt; 15; i++) {
+        if (i % 3 == 0) cout &lt;&lt; "  Row " &lt;&lt; setw(2) &lt;&lt; (i / 3 + 1) &lt;&lt; ":  ";
+        cout &lt;&lt; setw(3) &lt;&lt; seats[i].seatNumber
+             &lt;&lt; (seats[i].isBooked ? "[B]" : "[A]") &lt;&lt; "  ";
+        if ((i + 1) % 3 == 0) cout &lt;&lt; "\n";
+    }
+    cout &lt;&lt; "\n  ECONOMY CLASS (Rows 6-10)\n";
+    for (int i = 15; i &lt; TOTAL_SEATS; i++) {
+        if (i % 3 == 0) cout &lt;&lt; "  Row " &lt;&lt; setw(2) &lt;&lt; (i / 3 + 1) &lt;&lt; ":  ";
+        cout &lt;&lt; setw(3) &lt;&lt; seats[i].seatNumber
+             &lt;&lt; (seats[i].isBooked ? "[B]" : "[A]") &lt;&lt; "  ";
+        if ((i + 1) % 3 == 0) cout &lt;&lt; "\n";
+    }
+    cout &lt;&lt; "============================================\n";
+}
+
+// Book a seat
+void bookSeat(Seat seats[]) {
+    int seatNum;
+    cout &lt;&lt; "\nEnter seat number to book (1-" &lt;&lt; TOTAL_SEATS &lt;&lt; "): ";
+    cin  &gt;&gt; seatNum;
+
+    if (seatNum &lt; 1 || seatNum &gt; TOTAL_SEATS) {
+        cout &lt;&lt; "Invalid seat number.\n";
+        return;
+    }
+
+    Seat &amp;s = seats[seatNum - 1];
+    if (s.isBooked) {
+        cout &lt;&lt; "Seat " &lt;&lt; seatNum &lt;&lt; " is already booked by "
+             &lt;&lt; s.passengerName &lt;&lt; ".\n";
+        return;
+    }
+
+    cout &lt;&lt; "Enter passenger name: ";
+    cin.ignore();
+    getline(cin, s.passengerName);
+    s.isBooked = true;
+
+    string cls = (seatNum &lt;= 15) ? "First Class" : "Economy";
+    cout &lt;&lt; "\nBooking confirmed!\n";
+    cout &lt;&lt; "  Passenger : " &lt;&lt; s.passengerName &lt;&lt; "\n";
+    cout &lt;&lt; "  Seat No.  : " &lt;&lt; seatNum &lt;&lt; "\n";
+    cout &lt;&lt; "  Class     : " &lt;&lt; cls &lt;&lt; "\n";
+}
+
+// Cancel a booking
+void cancelSeat(Seat seats[]) {
+    int seatNum;
+    cout &lt;&lt; "\nEnter seat number to cancel (1-" &lt;&lt; TOTAL_SEATS &lt;&lt; "): ";
+    cin  &gt;&gt; seatNum;
+
+    if (seatNum &lt; 1 || seatNum &gt; TOTAL_SEATS) {
+        cout &lt;&lt; "Invalid seat number.\n";
+        return;
+    }
+
+    Seat &amp;s = seats[seatNum - 1];
+    if (!s.isBooked) {
+        cout &lt;&lt; "Seat " &lt;&lt; seatNum &lt;&lt; " is not booked.\n";
+        return;
+    }
+
+    cout &lt;&lt; "Cancelling booking for " &lt;&lt; s.passengerName
+         &lt;&lt; " on seat " &lt;&lt; seatNum &lt;&lt; "...\n";
+    s.passengerName = "";
+    s.isBooked      = false;
+    cout &lt;&lt; "Booking cancelled successfully.\n";
+}
+
+// View all reservations
+void viewReservations(Seat seats[]) {
+    cout &lt;&lt; "\n============================================\n";
+    cout &lt;&lt; "        CURRENT RESERVATIONS\n";
+    cout &lt;&lt; "============================================\n";
+    cout &lt;&lt; left &lt;&lt; setw(8) &lt;&lt; "Seat"
+              &lt;&lt; setw(10) &lt;&lt; "Class"
+              &lt;&lt; "Passenger\n";
+    cout &lt;&lt; "--------------------------------------------\n";
+
+    bool any = false;
+    for (int i = 0; i &lt; TOTAL_SEATS; i++) {
+        if (seats[i].isBooked) {
+            string cls = (i &lt; 15) ? "First" : "Economy";
+            cout &lt;&lt; left &lt;&lt; setw(8) &lt;&lt; seats[i].seatNumber
+                       &lt;&lt; setw(10) &lt;&lt; cls
+                       &lt;&lt; seats[i].passengerName &lt;&lt; "\n";
+            any = true;
+        }
+    }
+    if (!any) cout &lt;&lt; "No reservations found.\n";
+    cout &lt;&lt; "============================================\n";
+}
+
+int main() {
+    Seat seats[TOTAL_SEATS];
+    initSeats(seats);
+
+    cout &lt;&lt; "\n  Welcome to Abdul Moiz Airlines\n";
+
+    int choice;
+    do {
+        cout &lt;&lt; "\n============================================\n";
+        cout &lt;&lt; "  MAIN MENU\n";
+        cout &lt;&lt; "  1. View Seat Map\n";
+        cout &lt;&lt; "  2. Book a Seat\n";
+        cout &lt;&lt; "  3. Cancel a Booking\n";
+        cout &lt;&lt; "  4. View All Reservations\n";
+        cout &lt;&lt; "  5. Exit\n";
+        cout &lt;&lt; "============================================\n";
+        cout &lt;&lt; "  Enter choice: ";
+        cin  &gt;&gt; choice;
+
+        switch (choice) {
+            case 1: displaySeats(seats);    break;
+            case 2: bookSeat(seats);        break;
+            case 3: cancelSeat(seats);      break;
+            case 4: viewReservations(seats); break;
+            case 5: cout &lt;&lt; "\nThank you. Safe travels!\n"; break;
+            default: cout &lt;&lt; "Invalid option. Try again.\n";
+        }
+    } while (choice != 5);
+
+    return 0;
+}
+</pre>
+    </div>
+
+</section>
+
+<footer>
+    <p>&copy; 2025 <span>Abdul Moiz</span> &mdash; Built with HTML, CSS &amp; determination.</p>
+</footer>
+
+</body>
+</html>
